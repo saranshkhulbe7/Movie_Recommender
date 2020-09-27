@@ -1,7 +1,7 @@
 import requests
 import json
 
-def askMovies():
+def askMovies():                                                                #This function asks movies from the users as sample
     more = 'y'
     movieList = []
     while(more=='y'):
@@ -12,23 +12,23 @@ def askMovies():
         more = more.lower()
     return movieList
 
-def representList(lst):
+def representList(lst):                                                         #This function prints a list in numbered list
     for i in range(len(lst)):
         print(str(i+1) + ".",lst[i])
 
-def get_movies_from_tastedive(movieName):
-    tasteDrive_BaseURL = "https://tastedive.com/api/similar"
-    tasteDrive_KeyVal = {"q":movieName, "type":"movies", "limit":5}
-    page = requests.get(tasteDrive_BaseURL, params = tasteDrive_KeyVal)
+def get_movies_from_tastedive(movieName):                                       #This function collects data from TasteDive API
+    tasteDive_BaseURL = "https://tastedive.com/api/similar"
+    tasteDive_KeyVal = {"q":movieName, "type":"movies", "limit":5}
+    page = requests.get(tasteDive_BaseURL, params = tasteDive_KeyVal)
     return json.loads(page.text)
 
-def extract_movie_titles(dict):
+def extract_movie_titles(dict):                                       #This functions extracts the recommended movies from the data collected from TasteDive API
     lst = []
     for mdict in dict['Similar']['Results']:
         lst.append(mdict['Name'])
     return lst
 
-def get_related_titles(lst):
+def get_related_titles(lst):                               #This function merge different recommendations of different movies and strike out the redundant one's
     ultimate_list = []
     for movieName in lst:
         recommendedMoviesNameList = extract_movie_titles(get_movies_from_tastedive(movieName))
@@ -37,7 +37,7 @@ def get_related_titles(lst):
                 ultimate_list.append(movie)
     return ultimate_list
 
-def get_movie_data(movieName):
+def get_movie_data(movieName):                                #This functions collects data of an individual movie from OMDb API
     OMDb_BaseURL = "http://www.omdbapi.com/"
     OMDb_KeyVal = {"t":movieName,"r":"json","apikey":"7880735c"}
     page = requests.get(OMDb_BaseURL, params = OMDb_KeyVal)
@@ -45,7 +45,7 @@ def get_movie_data(movieName):
    # print(json.dumps(page.json(),indent=4))
     return dict
 
-def get_movie_rating(info):
+def get_movie_rating(info):                                   #This function extracts the Rotten Tomatoes rating from the data collected from OMDb API
     for dict in info["Ratings"]:
         if dict["Source"] == "Rotten Tomatoes":
             rating = int(dict["Value"][:-1])
@@ -53,7 +53,7 @@ def get_movie_rating(info):
     rating = 0
     return rating
 
-def get_sorted_recommendations(lst):
+def get_sorted_recommendations(lst):                          #This function sorts the movies according to their Rotten Tomatoes ratings
     lst5n = get_related_titles(lst)
     ratings = []
     for title in lst5n:
