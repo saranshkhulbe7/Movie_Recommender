@@ -10,5 +10,5 @@ So, in this project our code recommends you movies:
 
 
 
-<img src="https://github.com/saranshkhulbe7/Movie_Recommender/blob/master/Output.png" alt="Input Image" width="30%">
+<img src="https://github.com/saranshkhulbe7/Movie_Recommender/blob/master/Output.png" alt="Input Image" width="75%">
 
