@@ -6,7 +6,7 @@ All we have to do is to give name of the similar movies you would like to watch 
 So, in this project our code recommends you movies:
 
 
-## Example: Movie Recommender
+## Example:
 
 
 
