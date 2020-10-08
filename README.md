@@ -3,7 +3,7 @@ This Project shows how to make a movie recommender for all the movie buffs out t
 
 All we have to do is to give name of the similar movies you would like to watch in the program, and follow the instructions we'll get during run time!
 
-So, in this project our code recommends you movies:
+So, in this project our code recommends you movies :
 
 
 ## Example:
